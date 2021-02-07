@@ -3,21 +3,21 @@
 
 # SETTINGS {{{ ---
 
-active_text_color="#250F0B"
-active_bg=
-active_underline="#ECB3B2"
+active_text_color="#ffffff"
+active_bg="#7cb342"
+active_underline="#7cb342"
 
-inactive_text_color="#250F0B"
+inactive_text_color="#ffffff"
 inactive_bg=
 inactive_underline=
 
 separator="·"
 show="window_class" # options: window_title, window_class, window_classname
-forbidden_classes="Polybar Conky Gmrun"
-empty_desktop_message="Desktop"
+forbidden_classes="Polybar Conky Gmrun Ulauncher"
+empty_desktop_message=""
 
 char_limit=20
-max_windows=15
+max_windows=7
 char_case="normal" # normal, upper, lower
 add_spaces="true"
 resize_increment=16
@@ -48,11 +48,12 @@ main() {
 # ON-CLICK FUNCTIONS {{{ ---
 
 raise_or_minimize() {
-	if [ "$(get_active_wid)" = "$1" ]; then
-		wmctrl -ir "$1" -b toggle,hidden
-	else
-		wmctrl -ia "$1"
-	fi
+	#if [ "$(get_active_wid)" = "$1" ]; then
+		#wmctrl -ir "$1" -b toggle,hidden
+	#else
+		#wmctrl -ia "$1"
+	#fi
+  wmctrl -ia "$1"
 }
 
 close() {
@@ -209,10 +210,10 @@ generate_window_list() {
 
 		# Add on-click action Polybar formatting
 		printf "%s" "%{A1:$on_click raise_or_minimize $wid:}"
-		printf "%s" "%{A2:$on_click close $wid:}"
-		printf "%s" "%{A3:$on_click slop_resize $wid:}"
-		printf "%s" "%{A4:$on_click increment_size $wid:}"
-		printf "%s" "%{A5:$on_click decrement_size $wid:}"
+    #printf "%s" "%{A2:$on_click close $wid:}"
+		#printf "%s" "%{A3:$on_click slop_resize $wid:}"
+		#printf "%s" "%{A4:$on_click increment_size $wid:}"
+		#printf "%s" "%{A5:$on_click decrement_size $wid:}"
 		# Print the final window name
 		printf "%s" "$w_name"
 		printf "%s" "%{A}%{A}%{A}%{A}%{A}"
@@ -240,3 +241,4 @@ generate_window_list() {
 # --- }}}
 
 main "$@"
+
